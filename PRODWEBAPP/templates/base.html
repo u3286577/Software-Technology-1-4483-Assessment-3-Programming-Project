@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Gold ETF Prediction{% endblock %}</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #4f9dd5;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            color: #ffffff;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        form {
+            display: block;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        input[type="number"], input[type="text"], textarea, input[type="submit"] {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+            color: #000000;
+        }
+        input[type="submit"] {
+            background-color: #8cc774;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #a6403e;
+        }
+        a {
+            color: #4f9dd5;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: #a6403e;
+        }
+        .graph-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>Gold ETF Adjusted Close Price Prediction</h1>
+    </header>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

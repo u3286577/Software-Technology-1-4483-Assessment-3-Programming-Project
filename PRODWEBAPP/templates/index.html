@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Future Prices{% endblock %}
+
+{% block content %}
+    <h2 style="color: #8cc774;">Predict Future Adjusted Close Prices of Gold ETF</h2>
+    <form action="/predict" method="post">
+        <div class="form-group">
+            <label for="prediction_days">Number of days to predict:</label>
+            <input type="number" id="prediction_days" name="prediction_days" min="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="GDX_Close">GDX_Close values (comma-separated):</label>
+            <textarea id="GDX_Close" name="GDX_Close" rows="3" cols="50" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="SF_Price">SF_Price values (comma-separated):</label>
+            <textarea id="SF_Price" name="SF_Price" rows="3" cols="50" required></textarea>
+        </div>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <!-- Historical Data Graph -->
+    <h2 style="color: #8cc774;">Historical Adjusted Close Prices</h2>
+    <div id="historical-graph" class="graph-container"></div>
+    <script>
+        var dates = {{ dates | safe }};
+        var prices = {{ prices | safe }};
+
+        var data = [{
+            x: dates,
+            y: prices,
+            type: 'scatter',
+            mode: 'lines',
+            line: { color: 'green' },
+            name: 'Historical Data'
+        }];
+
+        var layout = {
+            xaxis: {
+                title: 'Date',
+                gridcolor: '#444444',
+                zerolinecolor: '#444444',
+                color: '#ffffff'
+            },
+            yaxis: {
+                title: 'Adjusted Close Price ($)',
+                gridcolor: '#444444',
+                zerolinecolor: '#444444',
+                color: '#ffffff'
+            },
+            plot_bgcolor: '#1e1e1e',
+            paper_bgcolor: '#1e1e1e',
+            font: { color: '#ffffff' }
+        };
+
+        Plotly.newPlot('historical-graph', data, layout);
+    </script>
+{% endblock %}

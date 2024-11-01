@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result{% endblock %}
+
+{% block content %}
+    <h2 style="color: #8cc774;">Predicted Adjusted Close Prices</h2>
+    {% if error %}
+        <p class="error">Error: {{ error }}</p>
+        <br>
+        <a href="/">Go back</a>
+    {% elif predictions %}
+        <h3 style="color: #4f9dd5;">Predicted Prices:</h3>
+        <ul>
+            {% for date, price in zip(future_dates, predictions) %}
+                <li><strong>{{ date }}:</strong> ${{ price|round(2) }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Graph including the predictions -->
+        <div id="prediction-graph" class="graph-container"></div>
+        <script>
+            var data = {{ graphJSON | safe }};
+
+            var layout = {
+                xaxis: {
+                    title: 'Date',
+                    gridcolor: '#444444',
+                    zerolinecolor: '#444444',
+                    color: '#ffffff'
+                },
+                yaxis: {
+                    title: 'Adjusted Close Price ($)',
+                    gridcolor: '#444444',
+                    zerolinecolor: '#444444',
+                    color: '#ffffff'
+                },
+                plot_bgcolor: '#1e1e1e',
+                paper_bgcolor: '#1e1e1e',
+                font: { color: '#ffffff' }
+            };
+
+            Plotly.newPlot('prediction-graph', data, layout);
+        </script>
+        <br>
+        <a href="/">Make another prediction</a>
+    {% else %}
+        <p>No prediction available.</p>
+    {% endif %}
+{% endblock %}
