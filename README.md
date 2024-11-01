@@ -2,7 +2,7 @@
 
 This project runs a Flask web application within a Docker container using `docker-compose`.
 
-To pull this repo, use `git clone [link-to.repo]`
+To pull this repo, use `git clone https://github.com/u3286577/Software-Technology-1-4483-Assessment-3-Programming-Project.git`
 
 Its recommended to run this container natively on linux or through WSL for the best experience.
 
